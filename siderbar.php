@@ -40,6 +40,7 @@
                         <a class="collapse-item" href="sqli_2.php">SQL Injection (POST/Select)</a>
                         <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
                         <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
+                        <a class="collapse-item" href="sqli_5.php">SQL Injection - Blind (WS/SOAP)</a>
                     </div>
                 </div>
                 

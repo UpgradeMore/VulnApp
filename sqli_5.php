@@ -59,10 +59,10 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>SQL Injection (GET/Search)</b></h1>
+                <h1 style="margin-left: 25px;"><b>SQL Injection Blind (WS/SOAP)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Search Movie details</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Select a movie:</h6>
                         </div>
                         <div class="card-body">
 
