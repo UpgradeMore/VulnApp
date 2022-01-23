@@ -43,6 +43,7 @@
                         <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
                         <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
                         <a class="collapse-item" href="sqli_5.php">SQL Injection - Blind (WS/SOAP)</a>
+                        <a class="collapse-item" href="sqli_16.php">Server-Side Includes (SSI) Injection</a>
                     </div>
                 </div>
                 
