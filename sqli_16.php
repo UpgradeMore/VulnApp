@@ -59,116 +59,29 @@ function sqli($data)
 
                 <div id="main">
 
-                
-                <h1>SQL Injection (Login Form/User)</h1>
+                <h1 style="margin-left: 25px;"><b>Server-Side Includes (SSI) Injection</b></h1>
+                    <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">What is your IP address? </h6>
+                        </div>
+                        <div class="card-body">
 
-                           <p>Enter your credentials.</p>
+                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
-                              <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                                    <p><label for="login">Login:</label><br />
-                                    <input type="text" id="login" name="login" size="20" autocomplete="off" /></p>
+                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                                    <p><label for="password">Password:</label><br />
-                                    <input type="password" id="password" name="password" size="20" autocomplete="off" /></p>
+                            <p><label for="firstname">First name:</label><br />
+                            <input type="text" id="firstname" name="firstname"></p>
 
-                                    <button type="submit" name="form" value="submit">Login</button>
+                            <p><label for="lastname">Last name:</label><br />
+                            <input type="text" id="lastname" name="lastname"></p>
 
-                                    </form>
-                           
-                                <?php
+                            <button type="submit" name="form" value="submit">Lookup</button>  
 
-                                if (isset($_GET["title"])) {
+                            </form>
 
-                                    $title = $_GET["title"];
-
-                                    $sql = "SELECT * FROM movies WHERE title LIKE '%" . sqli($title) . "%'";
-
-                                    $recordset = mysqli_query($link, $sql);
-
-                                    if (!$recordset) {
-
-                                        // die("Error: " . mysqli_error());
-
-                                ?>
-
-                                        <tr height="50">
-
-                                            <td colspan="5" width="580"><?php die("Error: " . mysqli_error($link)); ?></td>
-                                            <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                        </tr>
-                                        <?php
-
-                                    }
-
-                                    if (mysqli_num_rows($recordset) != 0) {
-
-                                        while ($row = mysqli_fetch_array($recordset)) {
-
-                                            // print_r($row);
-
-                                        ?>
-
-                                            <tr height="30">
-
-                                                <td><?php echo $row["title"]; ?></td>
-                                                <td align="center"><?php echo $row["release_year"]; ?></td>
-                                                <td><?php echo $row["main_character"]; ?></td>
-                                                <td align="center"><?php echo $row["genre"]; ?></td>
-                                                <td align="center"><a href="http://www.imdb.com/title/<?php echo $row["imdb"]; ?>" target="_blank">Link</a></td>
-
-                                            </tr>
-                                        <?php
-
-                                        }
-                                    } else {
-
-                                        ?>
-
-                                        <tr height="30">
-
-                                            <td colspan="5" width="580">No movies were found!</td>
-                                            <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                        </tr>
-                                    <?php
-
-                                    }
-
-                                    mysqli_close($link);
-                                } else {
-
-                                    ?>
-
-                                    <tr height="30">
-
-                                        <td colspan="5" width="580"></td>
-                                        <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                    </tr>
-                                <?php
-
-                                }
-
-                                ?>
-
-                            </table>
+                            
 
                         </div>
 
