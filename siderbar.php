@@ -36,8 +36,10 @@
                 </a>
                 <div id="collapsesql" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="sqli_1.php">SQL Injection (GET/Select)</a>
-                        <a class="collapse-item" href="sqli_2.php">SQL Injection (POST/Select)</a>
+                        <a class="collapse-item" href="sqli_1.php">SQL Injection (GET/Search)</a>
+                        <a class="collapse-item" href="sqli_6.php">SQL Injection (GET/Select)</a>
+                        <a class="collapse-item" href="sqli_2.php">SQL Injection (POST/Search)</a>
+                        <a class="collapse-item" href="sqli_7.php">SQL Injection (POST/Select)</a>
                         <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
                         <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
                         <a class="collapse-item" href="sqli_5.php">SQL Injection - Blind (WS/SOAP)</a>
