@@ -7,19 +7,13 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function sqli($data)
-{
-    return $data;
-}
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,11 +28,11 @@ function sqli($data)
 
     <!-- Custom styles for this template-->
     <link href="css/main.min.css" rel="stylesheet">
-
+<script src="js/xss_ajax_1.js"></script>
 </head>
 
 
-<body>
+<body onload="process()">
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -66,24 +60,9 @@ function sqli($data)
                         </div>
                         <div class="card-body">
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
-
-
-                            <form action="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
-
-                                <p>
-
-                                    <label for="title">Search for a movie:</label>
-                                    <input type="text" id="title" name="title" size="25">
-
-                                </p>
-                                <p>
-                                    <label for="title">HINT: our master really loves Marvel movies :)</label>
-                                </p>
-                                
-                            </form>
-
-                        
+                        <label for="title">Search for a movie:</label>
+                        <input type="text" id="title" name="title">
+                        <div id="result"></div>
                         </div>
 
 
