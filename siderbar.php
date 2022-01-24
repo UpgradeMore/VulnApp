@@ -39,17 +39,38 @@
                         <a class="collapse-item" href="sqli_1.php">SQL Injection (GET/Search)</a>
                         <a class="collapse-item" href="sqli_6.php">SQL Injection (GET/Select)</a>
                         <a class="collapse-item" href="sqli_2.php">SQL Injection (POST/Search)</a>
-                        <a class="collapse-item" href="sqli_7.php">SQL Injection (POST/Select)</a>
-                        <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
-                        <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
+                        <a class="collapse-item" href="sqli_7.php">SQL Injection (POST/Select)</a>     
                         <a class="collapse-item" href="sqli_5.php">SQL Injection - Blind (WS/SOAP)</a>
-                        <a class="collapse-item" href="sqli_16.php">Server-Side Includes (SSI) Injection</a>
-                        <a class="collapse-item" href="sqli_11.php">SQL Injection (SQLite)</a>
+                        <a class="collapse-item" href="sqli_4_1.php">SQL Injection - Blind - Boolean-Based</a>
+                        <a class="collapse-item" href="sqli_14.php">SQL Injection - Blind (SQLite)</a>
+                        <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
                         <a class="collapse-item" href="sqli_12.php">SQL Injection - Stored (SQLite)</a>
+                        <a class="collapse-item" href="sqli_8-1.php">SQL Injection - Stored (XML)</a>
+                        <a class="collapse-item" href="sqli_11.php">SQL Injection (SQLite)</a>
+                        <a class="collapse-item" href="sqli_16.php">Server-Side Includes (SSI) Injection</a>
+                        <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
                     </div>
                 </div>
                 
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsebam"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Cross-Site Scripting (XSS)</span>
+                </a>
+                <div id="collapsebam" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="xss_ajax_2-1.php">Cross-Site Scripting - Reflected (AJAX/JSON)</a>
+                        <a class="collapse-item" href="xss_ajax_1-1.php">Cross-Site Scripting - Reflected (AJAX/XML)</a>
+                        <a class="collapse-item" href="xss_login.php">Cross-Site Scripting - Reflected (Login Form)</a>
+                        <a class="collapse-item" href="xss_referer.php">Cross-Site Scripting - Reflected (Referer)</a>
+                        <a class="collapse-item" href="xss_user_agent.php">Cross-Site Scripting - Reflected (User-Agent)</a>
+                    </div>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsehtml"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -89,6 +110,7 @@
                     </div>
                 </div>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsebasm"
                     aria-expanded="true" aria-controls="collapseTwo">
