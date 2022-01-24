@@ -13,8 +13,9 @@ function sqli($data)
 }
 
 
-?>
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,20 +60,30 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>Session Mgmt. - Session ID in URL</b></h1>
+                <h1 style="margin-left: 25px;"><b>XSS - Reflected (JSON)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                        
+                           
                         </div>
-                        
-                        <p>Session IDs should never be exposed in the URL!</p>
-                
                         <div class="card-body">
 
                             <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
 
-                            
+                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
+
+                                 <p>
+
+                                 <label for="title">Search for a movie:</label>
+                                 <input type="text" id="title" name="title">    
+
+                                <button type="submit" name="action" value="search">Search</button>
+
+                                </p>
+
+                                </form>
+
+                            <p>HINT:our master really loves Marvel movies:)</p>
                                 <?php
 
                                 if (isset($_GET["title"])) {
@@ -173,8 +184,7 @@ function sqli($data)
                         <br />
                     </div>
                 </div>
-                
-
+               
 
 
             <!-- Bootstrap core JavaScript-->
