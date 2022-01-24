@@ -7,7 +7,7 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function sqli($data)
+function xss($data)
 {
     return $data;
 }
@@ -59,124 +59,53 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>XSS - Reflected (POST)</b></h1>
+                <h1 style="margin-left: 25px;"><b>XSS - Reflected (GET)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
-                        <div class="card-header py-3">
-                     
+                    <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Enter your first and last name:</h6>
                         </div>
-                        <p>Enter your first and last name:</p>
+                        
                         <div class="card-body">
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
+                        <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
+<p><label for="firstname">First name:</label><br />
+<input type="text" id="firstname" name="firstname"></p>
 
-                            <p><label for="firstname">First name:</label><br />
-                            <input type="text" id="firstname" name="firstname"></p>
+<p><label for="lastname">Last name:</label><br />
+<input type="text" id="lastname" name="lastname"></p>
 
-                            <p><label for="lastname">Last name:</label><br />
-                            <input type="text" id="lastname" name="lastname"></p>
+<button type="submit" name="form" value="submit">Go</button>
 
-                            <button type="submit" name="form" value="submit">Go</button>
+</form>
 
-    </form>
+<br />
+<?php
 
+if(isset($_POST["firstname"]) && isset($_POST["lastname"]))
+{
 
-                            
-                                <?php
+$firstname = $_POST["firstname"];
+$lastname = $_POST["lastname"];
 
-                                if (isset($_GET["title"])) {
+if($firstname == "" or $lastname == "")
+{
 
-                                    $title = $_GET["title"];
+    echo "<font color=\"red\">Please enter both fields...</font>";
 
-                                    $sql = "SELECT * FROM movies WHERE title LIKE '%" . sqli($title) . "%'";
+}
 
-                                    $recordset = mysqli_query($link, $sql);
+else
+{
 
-                                    if (!$recordset) {
+    echo "Welcome " . xss($firstname) . " " . xss($lastname);
 
-                                        // die("Error: " . mysqli_error());
+}
 
-                                ?>
+}
 
-                                        <tr height="50">
-
-                                            <td colspan="5" width="580"><?php die("Error: " . mysqli_error($link)); ?></td>
-                                            <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                        </tr>
-                                        <?php
-
-                                    }
-
-                                    if (mysqli_num_rows($recordset) != 0) {
-
-                                        while ($row = mysqli_fetch_array($recordset)) {
-
-                                            // print_r($row);
-
-                                        ?>
-
-                                            <tr height="30">
-
-                                                <td><?php echo $row["title"]; ?></td>
-                                                <td align="center"><?php echo $row["release_year"]; ?></td>
-                                                <td><?php echo $row["main_character"]; ?></td>
-                                                <td align="center"><?php echo $row["genre"]; ?></td>
-                                                <td align="center"><a href="http://www.imdb.com/title/<?php echo $row["imdb"]; ?>" target="_blank">Link</a></td>
-
-                                            </tr>
-                                        <?php
-
-                                        }
-                                    } else {
-
-                                        ?>
-
-                                        <tr height="30">
-
-                                            <td colspan="5" width="580">No movies were found!</td>
-                                            <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                        </tr>
-                                    <?php
-
-                                    }
-
-                                    mysqli_close($link);
-                                } else {
-
-                                    ?>
-
-                                    <tr height="30">
-
-                                        <td colspan="5" width="580"></td>
-                                        <!--
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        -->
-
-                                    </tr>
-                                <?php
-
-                                }
-
-                                ?>
-
-                            </table>
+?>
 
                         </div>
 
@@ -184,7 +113,7 @@ function sqli($data)
                         <br />
                     </div>
                 </div>
-                
+               
 
 
 

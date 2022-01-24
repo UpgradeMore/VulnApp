@@ -64,44 +64,77 @@ function sqli($data)
                     <h1 style="margin-left: 25px;"><b>XSS - Reflected (Login Form)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Enter your 'superhero' credentials</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Enter your 'superhero' credentials.</h6>
                         </div>
                         <div class="card-body">
 
-                            <form action="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>" method="POST">
+                        <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                                <p><label for="username">Login:</label><br />
-                                    <input type="text" id="username" name="username" size="20" autocomplete="off" />
-                                </p>
+<p><label for="login">Login:</label><br />
+<input type="text" id="login" name="login" size="20" autocomplete="off" /></p>
 
-                                <p><label for="password">Password:</label><br />
-                                    <input type="password" id="password" name="password" size="20" autocomplete="off" />
-                                </p>
+<p><label for="password">Password:</label><br />
+<input type="password" id="password" name="password" size="20" autocomplete="off" /></p>
 
-                                <button type="submit" name="form" value="submit">Login</button>
-                            </form>
+<button type="submit" name="form" value="submit">Login</button>
 
-                            <br />
-                            <?php
+</form>
 
-                            if (isset($_POST["form"])) {
+<br />
+<?php
 
-                                $username = $_POST["username"];
-                                $password = $_POST["password"];
-                                $password = hash("sha1", $password, false);
-                                $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-                                $result = mysqli_query($link, $sql);
-                                
-                                $row = mysqli_num_rows($result);
-                                if ($row>0) {
-                                        printf("Welcome " . $username);
-                                    }
-                                    else{
-                                        printf("Wrong Credentials");
-                                    mysqli_free_result($result);
-                                }
-                            }
-                            ?>
+if(isset($_POST["form"]))
+{
+
+$login = $_POST["login"];
+$login = sqli($login);
+
+$password = $_POST["password"];
+$password = sqli($password);
+
+$sql = "SELECT * FROM heroes WHERE login = '" . $login . "' AND password = '" . $password . "'";
+
+// echo $sql;
+
+$recordset = mysqli_query($link, $sql);
+
+if(!$recordset)
+{
+
+    die("Error: " . mysqli_error());
+
+}
+
+else
+{
+
+    $row = mysqli_fetch_array($recordset);
+
+    if($row["login"])
+    {
+
+        // $message = "<font color=\"green\">Welcome " . ucwords($row["login"]) . "...</font>";
+        $message =  "<p>Welcome <b>" . ucwords($row["login"]) . "</b>, how are you today?</p><p>Your secret: <b>" . ucwords($row["secret"]) . "</b></p>";
+        // $message = $row["login"];
+
+    }
+
+    else
+    {
+
+        $message = "<font color=\"red\">Invalid credentials!</font>";
+
+    }
+
+}
+
+mysqli_close($link);
+
+}
+
+echo $message;
+
+?>
 
                         </div>
 

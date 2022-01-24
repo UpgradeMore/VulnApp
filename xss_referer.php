@@ -7,7 +7,7 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function sqli($data)
+function  xss($data)
 {
     return $data;
 }
@@ -62,20 +62,32 @@ function sqli($data)
                 <h1 style="margin-left: 25px;"><b>XSS - Reflected (Referer)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Referer ID</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Reflected (Referer)</h6>
                         </div>
                         <div class="card-body">
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
+                         
+    <?php
 
+if(isset($_SERVER["HTTP_REFERER"]))
+{
 
-                            <form action="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
+    // print_r($_SERVER);
 
-                                <p>
-                                    <label for="title">The referer: http://localhost/bwapp/xss_login.php</label>
-                                </p>
+    $referer = $_SERVER["HTTP_REFERER"];
 
-                            </form>
+    echo "<p>The referer: <i>" . xss($referer) . "</i></p>";
+
+}
+
+else
+{
+
+    echo "<p><font color=\"red\">No referer was used!</font></p>";
+
+}
+
+?>
 
                         
                         </div>
