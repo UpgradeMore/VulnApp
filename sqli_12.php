@@ -61,93 +61,87 @@ function sqli($data)
                 <div id="main">
 
                 <h1 style="margin-left: 25px;"><b>SQL Injection - Stored (SQLite)</b></h1>
-                    <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Search for a movie:</h6>
-                        </div>
-                        <div class="card-body">
+                    
+                <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
+                <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                        <p>
+<p><label for="entry">Add an entry to our blog:</label><br />
+<textarea name="entry" id="entry" cols="80" rows="3"></textarea></p>
 
+<button type="submit" name="entry_add" value="add">Add Entry</button>
+<button type="submit" name="entry_delete" value="delete">Delete Entries</button>
 
-<input type="text" id="title" name="title" size="25">
+<?php
 
-<button type="submit" name="action" value="search">Search</button>
+if(isset($_POST["entry_add"]))
+{
 
-</p>
+    $entry = sqli($_POST["entry"]);
+    $owner = $_SESSION["login"];
 
-                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
+    if($entry == "")
+    {
 
-        
-        <?php
+        $message =  "<font color=\"red\">Please enter some text...</font>";
 
-        if(isset($_POST["entry_add"]))
-        {
+    }
 
-            $entry = sqli($_POST["entry"]);
-            $owner = $_SESSION["login"];
+    else
+    {
 
-            if($entry == "")
-            {
+        $db = new PDO("sqlite:".$db_sqlite);
 
-                $message =  "<font color=\"red\">Please enter some text...</font>";
+        $sql = "SELECT max(id) as id FROM blog;";
 
-            }
+        $recordset = $db->query($sql);
 
-            else
-            {
+$row = $recordset->fetch();
 
-                $db = new PDO("sqlite:".$db_sqlite);
+$id = $row["id"];
 
-                $sql = "SELECT max(id) as id FROM blog;";
+        $sql = "INSERT INTO blog (id, date, entry, owner) VALUES (" . ++$id . ",'" . date('Y-m-d', time()) . "','" . $entry . "','" . $owner . "');";
 
-                $recordset = $db->query($sql);
+$db->exec($sql);
 
-		$row = $recordset->fetch();
+        $message = "<font color=\"green\">The entry was added to our blog!</font>";
 
-		$id = $row["id"];
+    }
 
-                $sql = "INSERT INTO blog (id, date, entry, owner) VALUES (" . ++$id . ",'" . date('Y-m-d', time()) . "','" . $entry . "','" . $owner . "');";
+}
 
-		$db->exec($sql);
+elseif(isset($_POST["entry_delete"]))
+{
 
-                $message = "<font color=\"green\">The entry was added to our blog!</font>";
+$db = new PDO("sqlite:".$db_sqlite);
 
-            }
+        $sql = "DELETE FROM blog;";
 
-        }
+        $db->exec($sql);
 
-	elseif(isset($_POST["entry_delete"]))
-	{
+$message = "<font color=\"green\">Your entries were deleted!</font>";
 
-		$db = new PDO("sqlite:".$db_sqlite);
+}
 
-                $sql = "DELETE FROM blog;";
+echo "&nbsp;&nbsp;" . $message;
 
-                $db->exec($sql);
+?>
 
-		$message = "<font color=\"green\">Your entries were deleted!</font>";
-   
-	}
+</form>
 
-        echo "&nbsp;&nbsp;" . $message;
-
-        ?>
-
-    </form>
+                            
                             
 
-                            <table id="table_yellow">
+                               <table id="table_yellow">
 
-                                <tr height="30" bgcolor="#9936f3" align="center">
+                               <tr height="30" bgcolor="#9936f3" align="center">
 
-                                    <td width="200"><b>Title</b></td>
-                                    <td width="80"><b>Release</b></td>
-                                    <td width="140"><b>Character</b></td>
-                                    <td width="80"><b>Genre</b></td>
-                                    <td width="80"><b>IMDb</b></td>
+                                <td width="20">#</td>
+                                 <td width="100"><b>Owner</b></td>
+                                 <td width="100"><b>Date</b></td>
+                                  <td width="445"><b>Entry</b></td>
 
-                                </tr>
+                                 </tr>
+
                                 <?php
 
                                 if (isset($_GET["title"])) {
