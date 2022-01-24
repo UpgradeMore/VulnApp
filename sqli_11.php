@@ -59,10 +59,10 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>Server-Side Includes (SSI) Injection</b></h1>
+                <h1 style="margin-left: 25px;"><b>Portal</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">What is your IP address? </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Which bug do you want to hack today? :)</h6>
                         </div>
                         <div class="card-body">
 
@@ -71,15 +71,45 @@ function sqli($data)
 
                             <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                            <p><label for="firstname">First name:</label><br />
-                            <input type="text" id="firstname" name="firstname"></p>
+                                <select name="bug" size="9" id="select_portal">
 
-                            <p><label for="lastname">Last name:</label><br />
-                            <input type="text" id="lastname" name="lastname"></p>
+                                   <?php
 
-                            <button type="submit" name="form" value="submit">Lookup</button>  
+    // Lists the options from the array 'bugs' (bugs.txt)
+                                     foreach ($bugs as $key => $value)
+    {
 
-                            </form>
+                                      $bug = explode(",", trim($value));
+
+       // Debugging
+       // echo "key: " . $key;
+       // echo " value: " . $bug[0];
+       // echo " filename: " . $bug[1] . "<br />";
+                                         $selected = (mb_stristr($bug[1], basename($_SERVER["SCRIPT_NAME"]))!==false)? ' selected="selected"':'';
+
+
+                                         echo "
+                                         <option title='$bug[1]' value='$key' $selected>$bug[0]</option>";
+
+    }
+
+                                         ?>
+
+                                        </select>
+
+                                        <br />
+
+                                          <button type="submit" name="form" value="submit">Hack</button>
+
+                                          </form> 
+                                          <div id="side">
+
+                                              <a href="http://twitter.com" target="blank_" class="button"><img src="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjuoeHErsj1AhXO3jgGHZlbBJsQ9zB6BAgYEAk&url=https%3A%2F%2Ftwitter.com%2FTwitter&usg=AOvVaw1XWTdiJqtc0marIDXgeFxa"></a>
+                                              <a href="http://be.linkedin.com" target="blank_" class="button"><img src="./images/linkedin.png"></a>
+                                              <a href="http://www.facebook.com" target="blank_" class="button"><img src="./images/facebook.png"></a>
+                                              <a href="http://itsecgames.blogspot.com" target="blank_" class="button"><img src="./images/blogger.png"></a>
+
+                        </div>                
 
                             
 

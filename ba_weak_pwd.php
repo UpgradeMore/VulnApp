@@ -7,6 +7,51 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
+$bugs = file("bugs.txt");
+
+if(isset($_POST["form_bug"]) && isset($_POST["bug"]))
+{
+
+            $key = $_POST["bug"];
+            $bug = explode(",", trim($bugs[$key]));
+
+            // Debugging
+            // print_r($bug);
+
+            header("Location: " . $bug[1]);
+
+            exit;
+
+}
+$message = "";
+
+$login = "test";
+
+switch($_COOKIE["security_level"])
+{
+
+    case "0" :
+
+        $password = "test";
+        break;
+
+    case "1" :
+
+        $password = "test123";
+        break;
+
+    case "2" :
+
+        $password = "Test123";
+        break;
+
+    default :
+
+        $password = "test";
+        break;
+
+}
+
 function sqli($data)
 {
     return $data;
@@ -59,34 +104,57 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>Server-Side Includes (SSI) Injection</b></h1>
+                    <h1 style="margin-left: 25px;"><b>Broken Auth. - Weak Passwords</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">What is your IP address? </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Enter your credentials.</h6>
                         </div>
                         <div class="card-body">
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
+                        <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
 
-                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
+        <p><label for="login">Login:</label><br />
+        <input type="text" id="login" name="login" size="20" autocomplete="off" /></p>
 
-                            <p><label for="firstname">First name:</label><br />
-                            <input type="text" id="firstname" name="firstname"></p>
+        <p><label for="password">Password:</label><br />
+        <input type="password" id="password" name="password" size="20" autocomplete="off" /></p>
 
-                            <p><label for="lastname">Last name:</label><br />
-                            <input type="text" id="lastname" name="lastname"></p>
+        <button type="submit" name="form" value="submit">Login</button>
 
-                            <button type="submit" name="form" value="submit">Lookup</button>  
+    </form>   
+    <br />
+    <?php
 
-                            </form>
+if(isset($_POST["form"]))
+{
+
+    if($_POST["login"] == $login && $_POST["password"] == $password)
+    {
+
+        $message = "<font color=\"green\">Successful login!</font>";
+
+    }
+
+    else
+    {
+
+        $message = "<font color=\"red\">Invalid credentials!</font>";
+
+        }
+
+}
+
+echo $message;
+
+?>
 
                             
 
                         </div>
 
 
-                        <br />
+                        
                     </div>
                 </div>
                 <div class="mb-6">

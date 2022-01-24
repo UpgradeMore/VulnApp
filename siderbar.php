@@ -43,6 +43,9 @@
                         <a class="collapse-item" href="sqli_3.php">SQL Injection - Blind - Time-Based</a>
                         <a class="collapse-item" href="sqli_4.php">SQL Injection - Authentication Bypass</a>
                         <a class="collapse-item" href="sqli_5.php">SQL Injection - Blind (WS/SOAP)</a>
+                        <a class="collapse-item" href="sqli_16.php">Server-Side Includes (SSI) Injection</a>
+                        <a class="collapse-item" href="sqli_11.php">Portal</a>
+                        <a class="collapse-item" href="sqli_12.php">SQL Injection - Stored (SQLite)</a>
                     </div>
                 </div>
                 
@@ -83,6 +86,22 @@
                 <div id="collapsephpc" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="phpi.php">Reflected(GET)</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsebasm"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Broken Auth. & Session Mgmt.</span>
+                </a>
+                <div id="collapsebasm" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="ba_forgotten.php">Broken Authentication - Forgotten Function</a>
+                        <a class="collapse-item" href="ba_insecure_login_1.php">Broken Authentication - Insecure Login Forms</a>
+                        <a class="collapse-item" href="ba_pwd_attacks_1.php">Broken Authentication - Password Attacks</a>
+                        <a class="collapse-item" href="ba_weak_pwd.php">Broken Authentication - Weak Passwords</a>
+                        <a class="collapse-item" href="smgmt_admin_portal.php">Session Management - Administrative Portals</a>
                     </div>
                 </div>
             </li>

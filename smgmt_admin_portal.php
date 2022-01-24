@@ -7,9 +7,131 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function sqli($data)
+$message = "";
+
+switch($_COOKIE["security_level"])
 {
-    return $data;
+
+    case "0" :
+
+        if(isset($_GET["admin"]))
+        {
+
+            if($_GET["admin"] == "1")
+            {
+
+                $message = "Cowabunga...<p><font color=\"green\">You unlocked this page using an URL manipulation.</font></p>";
+
+            }
+
+            else
+            {
+
+                 $message="<font color=\"red\">This page is locked.</font><p>HINT: check the URL...</p>";
+
+            }
+
+        }
+
+        else
+        {
+
+            header("Location: " . $_SERVER["SCRIPT_NAME"] . "?admin=0");
+
+            exit;
+
+        }
+
+        break;
+
+    case "1" :
+
+        if((isset($_COOKIE["admin"])))
+        {
+
+            if($_COOKIE["admin"] == "1")
+            {
+
+				$message = "Cowabunga...<p><font color=\"green\">You unlocked this page using a cookie manipulation.</font></p>";
+
+            }
+
+            else
+            {
+
+                $message="<font color=\"red\">This page is locked.</font><p>HINT: check the cookies...</p>";
+
+            }
+
+        }
+
+        else
+        {
+
+            // Sets a cookie 'admin' when there is no cookie detected
+            setcookie("admin", "0", time()+300, "/", "", false, false);
+
+            header("Location: " . $_SERVER["SCRIPT_NAME"]);
+
+            exit;
+
+        }
+
+        break;
+
+    case "2" :
+
+        // Debugging
+        // print_r($_SESSION);
+
+        if(isset($_SESSION["admin"]) && $_SESSION["admin"] == 1)
+        {
+
+            $message = "Cowabunga...<p><font color=\"green\">You unlocked this page with a little help from the dba :)</font></p>";
+
+        }
+
+        else
+        {
+
+            $message="<font color=\"red\">This page is locked.</font><p>HINT: contact your dba...</p>";
+
+        }
+
+        break;
+
+    default :
+
+        if(isset($_GET["admin"]))
+        {
+
+            if($_GET["admin"] == "1")
+            {
+
+                $message = "Cowabunga...<p><font color=\"green\">You unlocked this page using an URL manipulation.</font></p>";
+
+            }
+
+            else
+            {
+
+                 $message="<font color=\"red\">This page is locked.</font><p>HINT: check the URL...</p>";
+
+            }
+
+        }
+
+        else
+        {
+
+            header("Location: " . $_SERVER["SCRIPT_NAME"] . "?admin=0");
+
+            exit;
+
+        }
+
+        break;
+
 }
 
 
@@ -59,34 +181,20 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>Server-Side Includes (SSI) Injection</b></h1>
+                    <h1 style="margin-left: 25px;"><b>Session Mgmt. - Administrative Portals</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">What is your IP address? </h6>
+                            <h6 class="m-0 font-weight-bold text-primary"></h6>
                         </div>
                         <div class="card-body">
+                        <?php echo $message;?>
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
-
-
-                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
-
-                            <p><label for="firstname">First name:</label><br />
-                            <input type="text" id="firstname" name="firstname"></p>
-
-                            <p><label for="lastname">Last name:</label><br />
-                            <input type="text" id="lastname" name="lastname"></p>
-
-                            <button type="submit" name="form" value="submit">Lookup</button>  
-
-                            </form>
-
-                            
+                           
 
                         </div>
 
 
-                        <br />
+                        
                     </div>
                 </div>
                 <div class="mb-6">
