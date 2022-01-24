@@ -62,13 +62,19 @@ function sqli($data)
                 <h1 style="margin-left: 25px;"><b>SQL Injection-Stored (XML)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Reset your secret to <input type="button" OnClick="ResetSecret();" value="Any bugs?"></h6>
+                        
                         </div>
                         <div class="card-body">
 
                             <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
+                            <form action="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
 
+                                <p>
+                                Reset your secret to <input type="button" OnClick="ResetSecret();" value="Any bugs?">
+                                </p>
+
+                            </form>
                             
                             <script type="text/javascript">
 
