@@ -59,59 +59,133 @@ function sqli($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>Portal</b></h1>
+                <h1 style="margin-left: 25px;"><b>SQL Injection (SQLite)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Which bug do you want to hack today? :)</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Search Movie details</h6>
                         </div>
                         <div class="card-body">
 
                             <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
 
 
-                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
+                            <form action="<?php echo($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
 
-                                <select name="bug" size="9" id="select_portal">
+                                  <p>
 
-                                   <?php
+                                  <label for="title">Search for a movie:</label>
+                                  <input type="text" id="title" name="title" size="25">
 
-    // Lists the options from the array 'bugs' (bugs.txt)
-                                     foreach ($bugs as $key => $value)
-    {
+                                      <button type="submit" name="action" value="search">Search</button> &nbsp;&nbsp;(requires the PHP SQLite module)
 
-                                      $bug = explode(",", trim($value));
+                                   </p>
 
-       // Debugging
-       // echo "key: " . $key;
-       // echo " value: " . $bug[0];
-       // echo " filename: " . $bug[1] . "<br />";
-                                         $selected = (mb_stristr($bug[1], basename($_SERVER["SCRIPT_NAME"]))!==false)? ' selected="selected"':'';
+                                   </form>
 
+                            <table id="table_yellow">
 
-                                         echo "
-                                         <option title='$bug[1]' value='$key' $selected>$bug[0]</option>";
+                                <tr height="30" bgcolor="#9936f3" align="center">
 
-    }
+                                    <td width="200"><b>Title</b></td>
+                                    <td width="80"><b>Release</b></td>
+                                    <td width="140"><b>Character</b></td>
+                                    <td width="80"><b>Genre</b></td>
+                                    <td width="80"><b>IMDb</b></td>
 
-                                         ?>
+                                </tr>
+                                <?php
 
-                                        </select>
+                                if (isset($_GET["title"])) {
 
-                                        <br />
+                                    $title = $_GET["title"];
 
-                                          <button type="submit" name="form" value="submit">Hack</button>
+                                    $sql = "SELECT * FROM movies WHERE title LIKE '%" . sqli($title) . "%'";
 
-                                          </form> 
-                                          <div id="side">
+                                    $recordset = mysqli_query($link, $sql);
 
-                                              <a href="http://twitter.com" target="blank_" class="button"><img src="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjuoeHErsj1AhXO3jgGHZlbBJsQ9zB6BAgYEAk&url=https%3A%2F%2Ftwitter.com%2FTwitter&usg=AOvVaw1XWTdiJqtc0marIDXgeFxa"></a>
-                                              <a href="http://be.linkedin.com" target="blank_" class="button"><img src="./images/linkedin.png"></a>
-                                              <a href="http://www.facebook.com" target="blank_" class="button"><img src="./images/facebook.png"></a>
-                                              <a href="http://itsecgames.blogspot.com" target="blank_" class="button"><img src="./images/blogger.png"></a>
+                                    if (!$recordset) {
 
-                        </div>                
+                                        // die("Error: " . mysqli_error());
 
-                            
+                                ?>
+
+                                        <tr height="50">
+
+                                            <td colspan="5" width="580"><?php die("Error: " . mysqli_error($link)); ?></td>
+                                            <!--
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        -->
+
+                                        </tr>
+                                        <?php
+
+                                    }
+
+                                    if (mysqli_num_rows($recordset) != 0) {
+
+                                        while ($row = mysqli_fetch_array($recordset)) {
+
+                                            // print_r($row);
+
+                                        ?>
+
+                                            <tr height="30">
+
+                                                <td><?php echo $row["title"]; ?></td>
+                                                <td align="center"><?php echo $row["release_year"]; ?></td>
+                                                <td><?php echo $row["main_character"]; ?></td>
+                                                <td align="center"><?php echo $row["genre"]; ?></td>
+                                                <td align="center"><a href="http://www.imdb.com/title/<?php echo $row["imdb"]; ?>" target="_blank">Link</a></td>
+
+                                            </tr>
+                                        <?php
+
+                                        }
+                                    } else {
+
+                                        ?>
+
+                                        <tr height="30">
+
+                                            <td colspan="5" width="580">No movies were found!</td>
+                                            <!--
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        -->
+
+                                        </tr>
+                                    <?php
+
+                                    }
+
+                                    mysqli_close($link);
+                                } else {
+
+                                    ?>
+
+                                    <tr height="30">
+
+                                        <td colspan="5" width="580"></td>
+                                        <!--
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        -->
+
+                                    </tr>
+                                <?php
+
+                                }
+
+                                ?>
+
+                            </table>
 
                         </div>
 
