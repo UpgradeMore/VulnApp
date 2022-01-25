@@ -1,5 +1,7 @@
 <?php
 
+include("functions_external.php");
+
 session_start();
 
 
@@ -81,6 +83,46 @@ function sqli($data)
                                 </p>
 
                             </form>
+
+                            <?php
+
+                                if(isset($_REQUEST["title"]))
+                                {
+
+                                    $title = $_REQUEST["title"];
+
+                                    $db = new PDO("sqlite:".$db_sqlite);
+
+                                    $sql = "SELECT * FROM movies WHERE title = '" . sqli($title) . "' COLLATE NOCASE";
+
+                                    $recordset = $db->query($sql);
+
+                                    if(!$recordset)
+                                    {
+
+                                        die("<font color=\"red\">Incorrect syntax detected!</font>");
+
+                                    }
+
+                                    if($recordset->fetchColumn() > 0)
+                                    {
+
+                                        echo "The movie exists in our database!";
+
+                                    }
+
+                                    else
+                                    {
+
+                                        echo "The movie does not exist in our database!";
+
+                                    }
+
+                                    $db = null;
+
+                                }
+
+                                ?>
 
                         
                         </div>
