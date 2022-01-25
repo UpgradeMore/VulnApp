@@ -62,6 +62,8 @@
                 </a>
                 <div id="collapsebam" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="xss_get.php">Cross-Site Scripting - Reflected (GET)</a>
+                        <a class="collapse-item" href="xss_post.php">Cross-Site Scripting - Reflected (POST)</a>
                         <a class="collapse-item" href="xss_ajax_2-1.php">Cross-Site Scripting - Reflected (AJAX/JSON)</a>
                         <a class="collapse-item" href="xss_ajax_1-1.php">Cross-Site Scripting - Reflected (AJAX/XML)</a>
                         <a class="collapse-item" href="xss_login.php">Cross-Site Scripting - Reflected (Login Form)</a>

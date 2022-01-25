@@ -7,7 +7,7 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function  xss($data)
+function xss($data)
 {
     return $data;
 }
@@ -59,55 +59,61 @@ function  xss($data)
 
                 <div id="main">
 
-                <h1 style="margin-left: 25px;"><b>XSS - Reflected (Referer)</b></h1>
+                <h1 style="margin-left: 25px;"><b>XSS - Reflected (GET)</b></h1>
                     <div class="card shadow mb-4" style="margin-left: 25px; margin-right: 300px;margin-top: 20px;">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Reflected (Referer)</h6>
+                    <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Enter your first and last name:</h6>
                         </div>
+                        
                         <div class="card-body">
 
-                         
-    <?php
 
-if(isset($_SERVER["HTTP_REFERER"]))
+                        <form action="<?php echo($_SERVER["SCRIPT_NAME"]);?>" method="POST">
+
+<p><label for="firstname">First name:</label><br />
+<input type="text" id="firstname" name="firstname"></p>
+
+<p><label for="lastname">Last name:</label><br />
+<input type="text" id="lastname" name="lastname"></p>
+
+<button type="submit" name="form" value="submit">Go</button>
+
+</form>
+
+<br />
+<?php
+
+if(isset($_POST["firstname"]) && isset($_POST["lastname"]))
 {
 
-    // print_r($_SERVER);
+$firstname = $_POST["firstname"];
+$lastname = $_POST["lastname"];
 
-    $referer = $_SERVER["HTTP_REFERER"];
+if($firstname == "" or $lastname == "")
+{
 
-    echo "<p>The referer: <i>" . xss($referer) . "</i></p>";
+    echo "<font color=\"red\">Please enter both fields...</font>";
 
 }
 
 else
 {
 
-    echo "<p><font color=\"red\">No referer was used!</font></p>";
+    echo "Welcome " . xss($firstname) . " " . xss($lastname);
+
+}
 
 }
 
 ?>
 
-                        
                         </div>
 
 
                         <br />
                     </div>
                 </div>
-                <div class="mb-6">
-                    <div class="card card-sm card-body rounded mb-3" style="margin-left: 25px; margin-right: 25px;">
-                        <div data-target="#panel-1" class="accordion-panel-header" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1"><span class="h6 mb-0">Solution</span><span class="icon" style="margin-left: 10px;"><i class="fas fa-angle-down"></i></span></div>
-                        <div class="collapse" id="panel-1">
-                            <div class="pt-3">
-                                <p class="mb-0">' or 'a' ='a</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+               
 
 
 

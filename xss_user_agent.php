@@ -7,7 +7,7 @@ include("config.php");
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     header("location: login.php");
 }
-function sqli($data)
+function xss($data)
 {
     return $data;
 }
@@ -66,16 +66,29 @@ function sqli($data)
                         </div>
                         <div class="card-body">
 
-                            <p> <a href="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>?message=test"></a></p>
+                           
+    <?php
 
+if(isset($_SERVER["HTTP_USER_AGENT"]))
+{
 
-                            <form action="<?php echo ($_SERVER["SCRIPT_NAME"]); ?>" method="GET">
+    // print_r($_SERVER);
 
-                                <p>
-                                    <label for="title">Your User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36</label>
-                                </p>
+    $user_agent = $_SERVER["HTTP_USER_AGENT"];
 
-                            </form>
+    echo "<p>Your User-Agent: <i>" . xss($user_agent) . "</i></p>";
+
+}
+
+else
+{
+
+    echo "<p><font color=\"red\">No User-Agent was used!</font></p>";
+
+}
+
+?>
+
 
                         
                         </div>
