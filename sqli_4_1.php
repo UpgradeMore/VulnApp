@@ -82,6 +82,47 @@ function sqli($data)
 
                             </form>
 
+                            <?php
+
+    if(isset($_REQUEST["title"]))
+    {
+
+        $title = $_REQUEST["title"];
+
+        $sql = "SELECT * FROM movies WHERE title = '" . sqli($title) . "'";
+
+        $recordset = mysqli_query($link, $sql);
+
+        if(!$recordset)
+        {
+
+            //die("<font color=\"red\">Incorrect syntax detected!</font>");
+             die("Error: " . mysqli_error($link));
+
+        }
+
+        if(mysqli_num_rows($recordset) != 0)
+        {
+
+            echo "The movie exists in our database!";
+
+        }
+
+        else
+        {
+
+            echo "The movie does not exist in our database!";
+
+        }
+
+        mysqli_close($link);
+
+    }
+
+    ?>
+
+                            
+
                         
                         </div>
 
