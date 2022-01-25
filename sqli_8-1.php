@@ -76,7 +76,7 @@ function sqli($data)
 
                             </form>
                             
-                            <script type="text/javascript">
+                        <script type="text/javascript">
 
                         function ResetSecret()
                         {
