@@ -101,6 +101,23 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#colapseosc"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Missing Functional Level Access Control</span>
+                </a>
+                <div id="colapseosc" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="hostheader_2.php">Host Header Attack (Reset Poisoning)</a>
+                        <a class="collapse-item" href="lfi_sqlitemanager.php">Local File Inclusion (SQLiteManager)</a>
+                        <a class="collapse-item" href="rlfi.php">Remote & Local File Inclusion (RFI/LFI)</a>
+                        <a class="collapse-item" href="ssrf.php">Server Side Request Forgery (SSRF)</a>
+                        <a class="collapse-item" href="xxe-1.php">XML External Entity Attacks (XXE)</a>
+                       
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsephpc"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
