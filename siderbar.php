@@ -147,6 +147,35 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesm"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Security Misconfiguration</span>
+                </a>
+                <div id="collapsesm" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="sm_dos_3.php">Denial-of-Service (Large Chunk Size)</a>
+                        <a class="collapse-item" href="sm_dos_1.php">Denial-of-Service (Slow HTTP DoS)</a>
+                        <a class="collapse-item" href="sm_dos_4.php">Denial-of-Service (SSL-Exhaustion)</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsesde"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Sensitive Data Exposure</span>
+                </a>
+                <div id="collapsesde" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="insecure_crypt_storage_3.php">Base64 Encoding (Secret)</a>
+                        <a class="collapse-item" href="insuff_transp_layer_protect_1.php">Clear Text HTTP (Credentials)</a>
+                    </div>
+                </div>
+            </li>
+
 
      
             <!-- Divider -->
